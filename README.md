@@ -1,4 +1,4 @@
-# My Executive Assistant
+# AI Executive Assistant
 
 Your personal executive assistant that lives in your terminal. Built on [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
 
@@ -30,8 +30,8 @@ Manages your day, tracks tasks, preps meetings, and keeps you accountable. Works
 ### Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/my-executive-assistant.git
-cd my-executive-assistant
+git clone https://github.com/cosmo-autom8s/ai-executive-assistant.git
+cd ai-executive-assistant
 ./install.sh
 ```
 
@@ -135,7 +135,7 @@ Next morning → Morning Brief reads the draft as a head start
 ## Updating
 
 ```bash
-cd my-executive-assistant
+cd ai-executive-assistant
 git pull
 ./install.sh
 ```
@@ -145,7 +145,7 @@ This updates all skills to the latest version. Your profile and context files ar
 ## Uninstall
 
 ```bash
-cd my-executive-assistant
+cd ai-executive-assistant
 ./uninstall.sh
 ```
 
@@ -154,3 +154,7 @@ You'll be asked whether to keep or remove your profile and context files.
 ## License
 
 MIT — see [LICENSE](LICENSE)
+
+## Credits
+
+Built by [Cosmin "Cosmo" Lungu](https://autom8lab.com). Visit [Autom8Lab](https://autom8lab.com) for more agents, skills, and resources.
