@@ -31,11 +31,11 @@ Manages your day, tracks tasks, preps meetings, and keeps you accountable. Works
 
 You don't need to understand any of the code below. Just open Claude Code and tell it:
 
-> "Clone and install this for me: https://github.com/cosmo-autom8s/ai-executive-assistant — then run /ea-setup so I can personalize it."
+> "Clone and install this for me: https://github.com/cosmo-autom8s/ai-executive-assistant"
 
-Claude Code will handle the rest. Follow the prompts on screen — the setup wizard walks you through everything: your working style, energy patterns, goals, and which tools to connect.
+Claude Code will handle the cloning and installation. Once it's done, restart Claude Code so the new commands take effect, then run `/ea-setup` to personalize your EA. The setup wizard walks you through everything: your working style, energy patterns, goals, and which tools to connect.
 
-Once setup is done, type `/ea` to start talking to your EA.
+After setup, type `/ea` to start talking to your EA.
 
 ### Manual Install (Technical)
 
@@ -45,7 +45,7 @@ cd ai-executive-assistant
 ./install.sh
 ```
 
-Then open Claude Code in any project and run `/ea-setup` to personalize.
+Then restart Claude Code so the new commands are available, and run `/ea-setup` to personalize.
 
 ### Start Your Day
 
