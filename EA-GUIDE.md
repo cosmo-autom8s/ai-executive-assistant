@@ -69,6 +69,7 @@ Pulls your calendar, tasks, email, and knowledge base. Presents:
 - **Quick Wins** — S tasks for admin time or between meetings
 - **Energy plan** — tasks matched to your energy windows
 - **Heads up** — overdue items, waiting-on follow-ups, capacity warnings
+- **Calendar blocks** — after you approve the plan, offers to create `[EA]` focus blocks in your calendar for M/L tasks. Always asks first, never auto-creates.
 
 80% buffer on capacity. Tasks matched to your energy windows from your profile.
 

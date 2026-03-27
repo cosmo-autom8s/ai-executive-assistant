@@ -117,6 +117,33 @@ After the user approves (or adjusts):
 2. If any tasks were reshuffled and a task tool is connected: update their dates in the tool
 3. Update `~/.claude/ea-context/task-cache.md` with latest task data from this session
 
+## Phase 6: CALENDAR BLOCKS — Offer to Write Focus Blocks
+
+After `~/.claude/ea-context/today.md` is saved, offer to create calendar events for the approved focus blocks.
+
+### What to offer
+- Only **M and L tasks** that have specific time slots in the energy plan (the focus blocks)
+- **Skip:** warm-up windows, admin windows, lunch, and anything already on the calendar as an existing event
+- Prefix each event title with `[EA]` so they're visually distinct from real meetings (e.g. `[EA] Audit EA system`)
+- Create events as **busy** blocks
+
+### How to ask
+Present the proposed blocks clearly and ask for approval:
+
+```
+Want me to add these focus blocks to your calendar?
+- 11:00–13:00: [EA] Audit EA system
+- 14:00–17:00: [EA] Rewrite prompts
+
+Say yes, or tell me which ones to skip.
+```
+
+### Rules
+- **Never auto-create.** Always ask and wait for explicit approval.
+- Only create events the user says yes to. Partial approval is fine ("just the first one").
+- Use the calendar tool to create each approved block with the title, start/end times, and busy status.
+- If no calendar tool is configured or it's unavailable, skip this phase entirely.
+
 ## Error Handling
 
 - **Task tool unavailable:** Fall back to `~/.claude/ea-context/task-cache.md`. Warn: "Working from cached data — your task tool isn't responding."
