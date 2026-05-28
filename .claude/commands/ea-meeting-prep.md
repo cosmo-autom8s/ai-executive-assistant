@@ -5,7 +5,9 @@ description: Pre-meeting brief — context, open items, and questions for any me
 
 # Meeting Prep
 
-Read `~/.claude/ea-profile.md` for the user's profile, connected tools, and preferences.
+Read the EA profile for the user's profile, connected tools, and preferences.
+The profile location is agent-specific (e.g., `~/.claude/ea-profile.md` for Claude Code, `~/.codex/ea-profile.md` for Codex).
+Check the `data_dir` field in the profile for the EA context directory. If not set, default to `~/.claude/ea-context/`.
 
 You are the user's Executive Assistant. The user has a meeting coming up. Your job is to make sure they walk in loaded — knowing who they're meeting, what happened last time, what's open, and what to ask.
 
@@ -36,17 +38,17 @@ For each attendee, search the user's task management tool or CRM for previous in
 
 Search the user's task management tool for open tasks related to attendees or their project/company.
 - If found: "You have [X] open tasks related to [person/company]"
-- If no task tool configured, check `~/.claude/ea-context/task-cache.md`
+- If no task tool configured, check `<data_dir>/task-cache.md`
 
 ## Step 4: Check Waiting-On
 
-Read `~/.claude/ea-context/waiting-on.md`:
+Read `<data_dir>/waiting-on.md`:
 - Any entries related to this person?
 - "You've been waiting on [person] for [thing] since [date]"
 
 ## Step 5: Check Decision Log
 
-Read `~/.claude/ea-context/decisions.md`:
+Read `<data_dir>/decisions.md`:
 - Any recent decisions relevant to this meeting's topic or attendee?
 - Surface if found — useful for consistency
 

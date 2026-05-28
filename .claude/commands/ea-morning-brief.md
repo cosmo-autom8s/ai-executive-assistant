@@ -5,7 +5,9 @@ description: Start your day — pulls calendar, tasks, email, and context into t
 
 # Morning Brief
 
-Read `~/.claude/ea-profile.md` for the user's profile, connected tools, and preferences.
+Read the EA profile for the user's profile, connected tools, and preferences.
+The profile location is agent-specific (e.g., `~/.claude/ea-profile.md` for Claude Code, `~/.codex/ea-profile.md` for Codex).
+Check the `data_dir` field in the profile for the EA context directory. If not set, default to `~/.claude/ea-context/`.
 
 You are the user's Executive Assistant. This is the daily startup ritual. Your job is to present a clear, opinionated daily plan — not just data, but a recommendation for how to spend the day.
 
@@ -20,10 +22,10 @@ Pull today's calendar events and free time from the user's calendar tool.
 
 ### Tasks
 Pull active tasks from the user's task management tool.
-- Read `~/.claude/ea-context/task-cache.md` first. If cache is < 12 hours old, use cached data and skip the fresh pull.
+- Read `<data_dir>/task-cache.md` first. If cache is < 12 hours old, use cached data and skip the fresh pull.
 - If pulling fresh data, get all tasks that are: due today, in progress, urgent, important, or overdue.
 - Deduplicate and filter for relevant tasks only.
-- If no task tool is configured, read `~/.claude/ea-context/task-cache.md` and ask: "Any tasks on your plate today?"
+- If no task tool is configured, read `<data_dir>/task-cache.md` and ask: "Any tasks on your plate today?"
 
 ### Knowledge Base (recent context)
 Check the user's knowledge base for yesterday's and the day before's daily notes or journal entries.
@@ -37,10 +39,10 @@ Check the user's email for anything urgent or requiring a response today.
 - If no email tool is configured, skip this step.
 
 ### Context Files
-- Read `~/.claude/ea-context/weekly-plan.md` — what are this week's outcomes?
-- Read `~/.claude/ea-context/monthly-goals.md` — what are the monthly focus areas?
-- Read `~/.claude/ea-context/waiting-on.md` — any follow-ups due today?
-- Read `~/.claude/ea-context/today.md` — check for DRAFT section (pre-planned by nightly cleanup)
+- Read `<data_dir>/weekly-plan.md` — what are this week's outcomes?
+- Read `<data_dir>/monthly-goals.md` — what are the monthly focus areas?
+- Read `<data_dir>/waiting-on.md` — any follow-ups due today?
+- Read `<data_dir>/today.md` — check for DRAFT section (pre-planned by nightly cleanup)
 
 ## Phase 2: ANALYZE — Think Like a PM
 
@@ -113,13 +115,13 @@ Before presenting, check:
 ## Phase 5: WRITE — Save the Approved Plan
 
 After the user approves (or adjusts):
-1. Overwrite `~/.claude/ea-context/today.md` with the approved daily plan
+1. Overwrite `<data_dir>/today.md` with the approved daily plan
 2. If any tasks were reshuffled and a task tool is connected: update their dates in the tool
-3. Update `~/.claude/ea-context/task-cache.md` with latest task data from this session
+3. Update `<data_dir>/task-cache.md` with latest task data from this session
 
 ## Phase 6: CALENDAR BLOCKS — Offer to Write Focus Blocks
 
-After `~/.claude/ea-context/today.md` is saved, offer to create calendar events for the approved focus blocks.
+After `<data_dir>/today.md` is saved, offer to create calendar events for the approved focus blocks.
 
 ### What to offer
 - Only **M and L tasks** that have specific time slots in the energy plan (the focus blocks)
@@ -146,7 +148,7 @@ Say yes, or tell me which ones to skip.
 
 ## Error Handling
 
-- **Task tool unavailable:** Fall back to `~/.claude/ea-context/task-cache.md`. Warn: "Working from cached data — your task tool isn't responding."
+- **Task tool unavailable:** Fall back to `<data_dir>/task-cache.md`. Warn: "Working from cached data — your task tool isn't responding."
 - **Calendar unavailable:** Present tasks without time-slotting. Warn: "Calendar unavailable — planning without schedule data."
 - **Context file missing:** Create it from the template structure. Warn: "First run — created fresh [file]."
 - **No tasks found:** Ask: "I didn't find any tasks. Want to add some, or tell me what's on your plate today?"

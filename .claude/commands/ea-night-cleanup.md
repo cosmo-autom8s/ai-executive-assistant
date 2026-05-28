@@ -5,7 +5,9 @@ description: End-of-day cleanup — size tasks, rebuild cache, draft tomorrow's 
 
 # Nightly Cleanup
 
-Read `~/.claude/ea-profile.md` for the user's profile, connected tools, and preferences.
+Read the EA profile for the user's profile, connected tools, and preferences.
+The profile location is agent-specific (e.g., `~/.claude/ea-profile.md` for Claude Code, `~/.codex/ea-profile.md` for Codex).
+Check the `data_dir` field in the profile for the EA context directory. If not set, default to `~/.claude/ea-context/`.
 
 You are the user's Executive Assistant running in autonomous mode. This is the end-of-day cleanup. Your job is to organize the task backlog, process anything new from today, and draft tomorrow's plan so the morning brief is fast.
 
@@ -34,7 +36,7 @@ Pull all active tasks from the user's task management tool (if connected).
 - Deduplicate results
 - Fetch full details for each task (max 40, process in batches of 20)
 - Filter out completed/archived tasks
-- If no task tool is configured, read `~/.claude/ea-context/task-cache.md`
+- If no task tool is configured, read `<data_dir>/task-cache.md`
 
 ### Calendar (tomorrow)
 Pull tomorrow's calendar events and free time from the user's calendar tool.
@@ -42,10 +44,10 @@ Pull tomorrow's calendar events and free time from the user's calendar tool.
 - If no calendar tool configured, use the user's default capacity from their profile.
 
 ### Context Files
-- Read `~/.claude/ea-context/monthly-goals.md` — for categorization
-- Read `~/.claude/ea-context/weekly-plan.md` — for day slotting context
-- Read `~/.claude/ea-context/waiting-on.md` — for follow-up checks
-- Read `~/.claude/ea-context/today.md` — for today's actuals (what got done, what didn't)
+- Read `<data_dir>/monthly-goals.md` — for categorization
+- Read `<data_dir>/weekly-plan.md` — for day slotting context
+- Read `<data_dir>/waiting-on.md` — for follow-up checks
+- Read `<data_dir>/today.md` — for today's actuals (what got done, what didn't)
 
 ## Phase 2: PROCESS — Organize the Backlog
 
@@ -57,7 +59,7 @@ For each task without a size:
 
 ### Categorize Against Goals
 For each task without a category:
-- Read `~/.claude/ea-context/monthly-goals.md`
+- Read `<data_dir>/monthly-goals.md`
 - Match: Goal-Aligned (which goal?), Client Work, Maintenance, or Orphan
 - Update in the task tool if possible
 
@@ -99,14 +101,14 @@ For tasks with no date that haven't been started:
 
 ### Check Waiting-On
 
-Read `~/.claude/ea-context/waiting-on.md`:
+Read `<data_dir>/waiting-on.md`:
 - Any follow-up dates = tomorrow? Flag them for morning brief.
 - Any items overdue (follow-up date < today)? Flag those too.
 - Remove items where the related task is now Done.
 
 ## Phase 4: WRITE — Save Everything
 
-### Update `~/.claude/ea-context/today.md` with tomorrow's draft
+### Update `<data_dir>/today.md` with tomorrow's draft
 
 Write a DRAFT section:
 
@@ -139,11 +141,11 @@ Write a DRAFT section:
 - [Admin time]: Quick Wins
 ```
 
-### Update `~/.claude/ea-context/waiting-on.md`
+### Update `<data_dir>/waiting-on.md`
 - Remove resolved items (task is complete)
 - Update follow-up dates if needed
 
-### Rebuild `~/.claude/ea-context/task-cache.md`
+### Rebuild `<data_dir>/task-cache.md`
 Write the full task snapshot with timestamp:
 
 ```markdown
@@ -185,7 +187,7 @@ Run /ea-morning-brief tomorrow to review and finalize.
 
 ## Error Handling
 
-- **Task tool unavailable:** Work from `~/.claude/ea-context/task-cache.md` only. Skip tool updates. Warn: "Task tool isn't responding — cleaned up local files only."
+- **Task tool unavailable:** Work from `<data_dir>/task-cache.md` only. Skip tool updates. Warn: "Task tool isn't responding — cleaned up local files only."
 - **Calendar unavailable:** Draft tomorrow's plan without calendar data. Use default capacity from profile. Warn: "Calendar unavailable — using default capacity."
 - **Too many tasks (>40):** Process in priority order: overdue → urgent → important → due this week → recently created. Warn: "Processed 40 of [N] tasks. Run again to process more."
 - **Context file missing:** Create from template structure. Note in report.

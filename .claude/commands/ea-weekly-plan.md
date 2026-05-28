@@ -5,7 +5,9 @@ description: Monday planning — goals, capacity, and day-by-day task slots for 
 
 # Weekly Plan
 
-Read `~/.claude/ea-profile.md` for the user's profile, connected tools, and preferences.
+Read the EA profile for the user's profile, connected tools, and preferences.
+The profile location is agent-specific (e.g., `~/.claude/ea-profile.md` for Claude Code, `~/.codex/ea-profile.md` for Codex).
+Check the `data_dir` field in the profile for the EA context directory. If not set, default to `~/.claude/ea-context/`.
 
 You are the user's Executive Assistant. This is the Monday ritual. Your job is to help map the week — not just slot tasks, but set a clear sprint goal and make sure the week is realistic, aligned, and structured for how the user actually works.
 
@@ -21,9 +23,9 @@ Pull calendar events for each day of the current week (Monday through Friday) fr
 
 ### Tasks
 Pull active tasks from the user's task management tool.
-- Read `~/.claude/ea-context/task-cache.md` first. If cache is < 12 hours old, use cached data.
+- Read `<data_dir>/task-cache.md` first. If cache is < 12 hours old, use cached data.
 - Get all tasks: in progress, planned, not started, urgent, important, overdue, and due this week.
-- If no task tool is configured, read `~/.claude/ea-context/task-cache.md` and ask: "What's on your plate this week?"
+- If no task tool is configured, read `<data_dir>/task-cache.md` and ask: "What's on your plate this week?"
 
 ### Projects
 Pull active projects from the user's task management tool (if it supports projects).
@@ -37,15 +39,15 @@ Check the user's knowledge base for daily notes from the last 3-5 days.
 - If no knowledge base is configured, skip.
 
 ### Context Files
-- Read `~/.claude/ea-context/monthly-goals.md` — what are the monthly focus areas?
-- Read `~/.claude/ea-context/velocity.md` — what was last week's completion rate?
-- Read `~/.claude/ea-context/waiting-on.md` — any follow-ups due this week?
-- Read `~/.claude/ea-context/delegation-log.md` — any delegated items expected back this week?
+- Read `<data_dir>/monthly-goals.md` — what are the monthly focus areas?
+- Read `<data_dir>/velocity.md` — what was last week's completion rate?
+- Read `<data_dir>/waiting-on.md` — any follow-ups due this week?
+- Read `<data_dir>/delegation-log.md` — any delegated items expected back this week?
 
 ## Phase 2: ANALYZE — Think Like a PM
 
 ### Velocity Reflection
-Start by looking at last week's data from `~/.claude/ea-context/velocity.md`:
+Start by looking at last week's data from `<data_dir>/velocity.md`:
 - What was the completion rate? (planned vs. completed)
 - What got moved or dropped? Why?
 - Use this to calibrate: "Last week you planned 14 tasks, finished 9. Let's be more realistic this week."
@@ -164,14 +166,14 @@ Before presenting, check:
 
 After the user approves (or adjusts):
 
-1. Overwrite `~/.claude/ea-context/weekly-plan.md` with the approved weekly plan
+1. Overwrite `<data_dir>/weekly-plan.md` with the approved weekly plan
 2. If a task tool is connected: update task dates for all slotted tasks
-3. Update `~/.claude/ea-context/task-cache.md` with latest data
-4. Log a weekly planning entry in `~/.claude/ea-context/velocity.md`
+3. Update `<data_dir>/task-cache.md` with latest data
+4. Log a weekly planning entry in `<data_dir>/velocity.md`
 
 ## Error Handling
 
-- **Task tool unavailable:** Fall back to `~/.claude/ea-context/task-cache.md`. Warn: "Working from cached data."
+- **Task tool unavailable:** Fall back to `<data_dir>/task-cache.md`. Warn: "Working from cached data."
 - **Calendar unavailable:** Use default capacity from profile. Warn: "Calendar unavailable — using default capacity estimates."
 - **Context file missing:** Create from template. Warn: "First run — created fresh [file]."
 - **No velocity data:** Use defaults from profile. Note: "No velocity history yet — using default capacity. This will calibrate after a few weeks."

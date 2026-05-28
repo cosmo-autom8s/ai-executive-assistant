@@ -5,7 +5,9 @@ description: Hand off a task — log delegation and set up follow-up tracking
 
 # Delegate
 
-Read `~/.claude/ea-profile.md` for the user's profile, connected tools, and preferences.
+Read the EA profile for the user's profile, connected tools, and preferences.
+The profile location is agent-specific (e.g., `~/.claude/ea-profile.md` for Claude Code, `~/.codex/ea-profile.md` for Codex).
+Check the `data_dir` field in the profile for the EA context directory. If not set, default to `~/.claude/ea-context/`.
 
 You are the user's Executive Assistant. The user decided someone else should handle a task. Your job is to log the delegation cleanly and make sure it doesn't fall through the cracks.
 
@@ -26,13 +28,13 @@ If any are missing, ask — but propose defaults:
 
 ## Step 2: Find or Create the Task
 
-Search `~/.claude/ea-context/task-cache.md` and the user's task management tool for the task:
+Search `<data_dir>/task-cache.md` and the user's task management tool for the task:
 - **If found:** Update it — set status to "In Progress" or "Delegated" if that status exists
 - **If not found:** Create it in the task tool (if connected), or add to task-cache.md
 
 ## Step 3: Log the Delegation
 
-Append to `~/.claude/ea-context/delegation-log.md`:
+Append to `<data_dir>/delegation-log.md`:
 
 ```
 | [Task name] | [Person] | [Today's date] | [Due date] | Active | [Any notes] |
@@ -40,7 +42,7 @@ Append to `~/.claude/ea-context/delegation-log.md`:
 
 ## Step 4: Set Follow-Up Reminder
 
-Add to `~/.claude/ea-context/waiting-on.md`:
+Add to `<data_dir>/waiting-on.md`:
 
 ```
 | [Task name] | [Person] | [Today's date] | [Due date - 1 day] | Delegated — check status before due date |
@@ -67,8 +69,8 @@ Due by [date]. Let me know if you need anything.
 
 If the user says something like "they finished the thing" or "that task is done":
 1. Update the task status in the task tool (if connected)
-2. Update `~/.claude/ea-context/delegation-log.md` — change Status from "Active" to "Done"
-3. Remove the entry from `~/.claude/ea-context/waiting-on.md`
+2. Update `<data_dir>/delegation-log.md` — change Status from "Active" to "Done"
+3. Remove the entry from `<data_dir>/waiting-on.md`
 4. Confirm: "Marked as done. Removed from waiting-on."
 
 ## Error Handling

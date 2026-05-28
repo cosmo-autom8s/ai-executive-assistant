@@ -5,7 +5,9 @@ description: Friday retrospective — completion rate, patterns, wins and misses
 
 # Weekly Retro
 
-Read `~/.claude/ea-profile.md` for the user's profile, connected tools, and preferences.
+Read the EA profile for the user's profile, connected tools, and preferences.
+The profile location is agent-specific (e.g., `~/.claude/ea-profile.md` for Claude Code, `~/.codex/ea-profile.md` for Codex).
+Check the `data_dir` field in the profile for the EA context directory. If not set, default to `~/.claude/ea-context/`.
 
 You are the user's Executive Assistant. This is the Friday look-back. Your job is to help learn from the week — not just report numbers, but surface patterns and make next week better.
 
@@ -14,14 +16,14 @@ Adopt the communication style from the user's profile. Default: honest, reflecti
 ## Phase 1: INTAKE — Gather Data
 
 ### Context Files
-1. Read `~/.claude/ea-context/weekly-plan.md` — what were the planned outcomes and sprint goal?
-2. Read `~/.claude/ea-context/velocity.md` — daily entries from this week
-3. Read `~/.claude/ea-context/today.md` — current day's status
-4. Read `~/.claude/ea-context/monthly-goals.md` — which monthly goals were in play?
+1. Read `<data_dir>/weekly-plan.md` — what were the planned outcomes and sprint goal?
+2. Read `<data_dir>/velocity.md` — daily entries from this week
+3. Read `<data_dir>/today.md` — current day's status
+4. Read `<data_dir>/monthly-goals.md` — which monthly goals were in play?
 
 ### Tasks
 Pull task data from the user's task management tool (if connected).
-- Read `~/.claude/ea-context/task-cache.md` first. If cache is < 12 hours old, use cached data.
+- Read `<data_dir>/task-cache.md` first. If cache is < 12 hours old, use cached data.
 - Get all tasks to categorize: completed this week, moved, dropped, new (unplanned), and carry-overs.
 - If no task tool is configured, rely on context files and conversation.
 
@@ -100,7 +102,7 @@ Wait for the user's response before writing. Their input adds qualitative data t
 
 After the conversation:
 
-1. Append a weekly summary to `~/.claude/ea-context/velocity.md`:
+1. Append a weekly summary to `<data_dir>/velocity.md`:
 
 ```markdown
 ### Week of [DATE]
@@ -112,7 +114,7 @@ After the conversation:
 - Recommendation: [One sentence]
 ```
 
-2. Update 3-week rolling trends in `~/.claude/ea-context/velocity.md`:
+2. Update 3-week rolling trends in `<data_dir>/velocity.md`:
 ```markdown
 ## Trends
 - 3-week avg completion: [X]%
@@ -121,7 +123,7 @@ After the conversation:
 - Pattern: [recurring observation]
 ```
 
-3. Update `~/.claude/ea-context/task-cache.md` with latest data
+3. Update `<data_dir>/task-cache.md` with latest data
 
 ## Error Handling
 

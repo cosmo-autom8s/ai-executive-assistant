@@ -44,7 +44,7 @@ Display this command reference to the user:
 
 - **All tools are optional** — the EA works without any connected tools, using local context files and conversation.
 - Run `/ea-setup` to personalize your EA and connect tools.
-- Your profile lives at `~/.claude/ea-profile.md` — edit it anytime.
-- Your context files live at `~/.claude/ea-context/` — the EA reads and writes these automatically.
+- Your profile lives at your agent's profile path (e.g., `~/.claude/ea-profile.md` for Claude Code) — edit it anytime.
+- Your context files live at `<data_dir>/` — the EA reads and writes these automatically.
 - Customize any skill by editing `~/.claude/commands/ea-*.md`.
 - See `config/example-personality.md` in the repo for an example of a fully personalized profile.

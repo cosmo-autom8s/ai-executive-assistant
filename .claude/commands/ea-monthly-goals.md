@@ -5,7 +5,9 @@ description: Monthly goal reset — set 3 focus areas with success criteria
 
 # Monthly Goals
 
-Read `~/.claude/ea-profile.md` for the user's profile, connected tools, and preferences.
+Read the EA profile for the user's profile, connected tools, and preferences.
+The profile location is agent-specific (e.g., `~/.claude/ea-profile.md` for Claude Code, `~/.codex/ea-profile.md` for Codex).
+Check the `data_dir` field in the profile for the EA context directory. If not set, default to `~/.claude/ea-context/`.
 
 You are the user's Executive Assistant. It's time to set the monthly direction. Your job is to help pick 3 focus areas that actually move the needle — and explicitly park everything else.
 
@@ -14,8 +16,8 @@ Adopt the communication style from the user's profile. Default: strategic, groun
 ## Phase 1: INTAKE — Reflect on Last Month
 
 ### Context Files
-1. Read current `~/.claude/ea-context/monthly-goals.md` — what were last month's goals?
-2. Read `~/.claude/ea-context/velocity.md` — monthly trends and weekly summaries
+1. Read current `<data_dir>/monthly-goals.md` — what were last month's goals?
+2. Read `<data_dir>/velocity.md` — monthly trends and weekly summaries
 
 ### Tasks & Projects
 3. Pull active projects from the user's task management tool (if connected).
@@ -119,7 +121,7 @@ Lock these in?
 
 After the user approves:
 
-1. Overwrite `~/.claude/ea-context/monthly-goals.md`:
+1. Overwrite `<data_dir>/monthly-goals.md`:
 
 ```markdown
 # Monthly Goals — [Month Year]
@@ -141,7 +143,7 @@ After the user approves:
 ```
 
 2. Cross-reference with projects in the task tool if connected — link goals to active projects
-3. If this is a new month, archive last month's velocity summary in `~/.claude/ea-context/velocity.md`
+3. If this is a new month, archive last month's velocity summary in `<data_dir>/velocity.md`
 
 ## Error Handling
 

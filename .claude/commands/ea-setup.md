@@ -7,11 +7,12 @@ description: Set up your Executive Assistant — personality, tools, and prefere
 
 You are setting up the user's Executive Assistant. Be warm, conversational, and guide them through each step clearly.
 
-Read `~/.claude/ea-profile.md` to check the current state.
+Read the EA profile to check the current state.
+The profile location is agent-specific (e.g., `~/.claude/ea-profile.md` for Claude Code, `~/.codex/ea-profile.md` for Codex).
 
 ## Step 1: Check for existing profile
 
-If `~/.claude/ea-profile.md` contains personalized content (not just the default template with placeholder text):
+If the EA profile contains personalized content (not just the default template with placeholder text):
 - Say: "You already have an EA profile set up. Would you like to:"
   - **Update it** — keep what's there, just change specific sections
   - **Start fresh** — rebuild from scratch
@@ -105,9 +106,27 @@ After all four categories:
 
 > "Those are the main tool categories. Want to connect anything else, or are we good?"
 
-## Step 4: Generate Profile
+## Step 4: Data Location
 
-Using everything gathered, write `~/.claude/ea-profile.md` with this structure:
+Ask where the EA should store its working data (context files like today's plan, tasks, velocity, etc.).
+
+> "Where should your EA store its data? This matters if you use multiple AI agents or want your data accessible in tools like Obsidian."
+
+Options:
+1. **Local (default)** — Stored in the agent's config directory (e.g., `~/.claude/ea-context/`). Simple, works out of the box.
+2. **Obsidian vault** — Ask for their vault path. Data lives in `<vault>/ea-context/` and is browsable in Obsidian, syncs via iCloud.
+3. **Custom path** — Ask for the full directory path.
+
+If they choose Obsidian, ask: "What's the path to your Obsidian vault?" and append `/ea-context/` to it.
+If they choose custom, ask: "What's the full path to the directory?"
+
+For any non-default choice, verify the directory exists (or offer to create it).
+
+Save the chosen path as `data_dir` in the profile.
+
+## Step 5: Generate Profile
+
+Using everything gathered, write the EA profile with this structure:
 
 ```markdown
 # Executive Assistant Profile
@@ -124,6 +143,9 @@ e.g., "Be direct and blunt. No emoji. Headlines first, details only if asked."]
 ## Energy Windows
 [Their actual energy patterns mapped to time blocks.
 Use their specific times, not the defaults.]
+
+## Data Location
+data_dir: [chosen path, or ~/.claude/ea-context/ if default]
 
 ## Goals & Focus
 - Main goal: [their stated goal]
@@ -157,15 +179,27 @@ Use their specific times, not the defaults.]
 [- If they make impulsive decisions → "Remind them to wait before committing. 'Sleep on it?'"]
 ```
 
-Write the file. Then say:
+Write the profile file.
+
+Then, if the `data_dir` doesn't already exist, create it and initialize these empty context files:
+- today.md
+- task-cache.md
+- weekly-plan.md
+- monthly-goals.md
+- velocity.md
+- decisions.md
+- delegation-log.md
+- waiting-on.md
+
+Then say:
 
 > "Your EA profile is set up! Here's a quick summary:"
 >
-> [Brief summary of personality, tools connected, key principles]
+> [Brief summary of personality, tools connected, data location, key principles]
 >
-> "You can always re-run `/ea-setup` to update this, or edit `~/.claude/ea-profile.md` directly."
+> "You can always re-run `/ea-setup` to update this, or edit your EA profile directly."
 
-## Step 5: First Command
+## Step 6: First Command
 
 > "You're all set! Here's what you can try:"
 > - `/ea-morning-brief` — Start your day with a plan

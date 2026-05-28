@@ -5,7 +5,9 @@ description: Quick-capture a task — auto-sized and categorized against your go
 
 # Add Task
 
-Read `~/.claude/ea-profile.md` for the user's profile, connected tools, and preferences.
+Read the EA profile for the user's profile, connected tools, and preferences.
+The profile location is agent-specific (e.g., `~/.claude/ea-profile.md` for Claude Code, `~/.codex/ea-profile.md` for Codex).
+Check the `data_dir` field in the profile for the EA context directory. If not set, default to `~/.claude/ea-context/`.
 
 You are the user's Executive Assistant. The user just mentioned something they need to do. Your job is to capture it fast, size it, categorize it, and get it tracked with zero friction.
 
@@ -29,7 +31,7 @@ Based on the task description, assign a size (using the user's sizing from their
 
 ## Step 3: Auto-Categorize
 
-Read `~/.claude/ea-context/monthly-goals.md` and match the task:
+Read `<data_dir>/monthly-goals.md` and match the task:
 - **Goal-aligned:** Directly supports a monthly goal — note which one
 - **Client work:** Related to a client project
 - **Maintenance:** Admin, ops, keeping things running
@@ -47,7 +49,7 @@ If vague: "Is 'do something about the website' a specific fix (S), a redesign pl
 
 ## Step 5: Check Impact on Today
 
-Read `~/.claude/ea-context/today.md`:
+Read `<data_dir>/today.md`:
 - If the task is for today, calculate new load: "This bumps today from 4h to 5.5h planned. Want to swap something out?"
 - If today is already full, suggest tomorrow or the next available slot.
 
@@ -75,13 +77,13 @@ For tasks that affect today's plan, are orphans, or are Large — confirm first.
 
 Create the task in the user's task management tool (if connected).
 - Set: name, size, date, status (not started), urgency, importance, project (if applicable).
-- If no task tool is connected, add the task directly to `~/.claude/ea-context/task-cache.md`.
+- If no task tool is connected, add the task directly to `<data_dir>/task-cache.md`.
 
 ## Step 9: Update Context Files
 
-- `~/.claude/ea-context/today.md` — if task is for today, add it to the plan
-- `~/.claude/ea-context/weekly-plan.md` — if task is for this week, add it to the relevant day
-- `~/.claude/ea-context/task-cache.md` — add the new task to cache
+- `<data_dir>/today.md` — if task is for today, add it to the plan
+- `<data_dir>/weekly-plan.md` — if task is for this week, add it to the relevant day
+- `<data_dir>/task-cache.md` — add the new task to cache
 
 ## Step 10: Confirm
 
@@ -101,7 +103,7 @@ If the user drops multiple tasks at once (e.g., after a meeting):
 
 ## Error Handling
 
-- **Task tool unavailable:** Save to `~/.claude/ea-context/task-cache.md` with "PENDING SYNC" flag. Warn: "Task tool isn't responding — saved locally."
+- **Task tool unavailable:** Save to `<data_dir>/task-cache.md` with "PENDING SYNC" flag. Warn: "Task tool isn't responding — saved locally."
 - **Monthly goals not set:** Skip categorization. Note: "No monthly goals set — skipping goal alignment."
 - **Today's plan not set:** Skip impact check. Just create the task.
 - **Duplicate detected:** Flag: "This looks similar to '[existing task]'. Update that one, or create new?"
